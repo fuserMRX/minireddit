@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="60" viewBox="0 0 250 60">
+    <!-- Circle Background -->
+    <circle cx="30" cy="30" r="20" fill="#4666D6"/>
+    
+    <!-- Reddit Alien Head -->
+    <circle cx="30" cy="30" r="10" fill="white"/>
+    <circle cx="26" cy="28" r="2" fill="black"/>
+    <circle cx="34" cy="28" r="2" fill="black"/>
+    <path d="M24 33 Q30 38, 36 33" stroke="black" stroke-width="1.5" fill="none"/>
+
+    <!-- Antenna -->
+    <line x1="30" y1="20" x2="35" y2="15" stroke="white" stroke-width="1.5"/>
+    <circle cx="35" cy="15" r="2" fill="white"/>
+
+    <!-- Text with Proper Spacing -->
+    <text x="60" y="35" font-family="Arial" font-size="18" font-weight="bold" fill="#4666D6">Reddit</text>
+    <text x="125" y="35" font-family="Arial" font-size="18" font-weight="bold" fill="gray">Minimal</text>
+</svg>
