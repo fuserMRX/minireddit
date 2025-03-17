@@ -1,8 +1,28 @@
 import type { Metadata } from 'next';
-import { Counter } from '@/components/counter/Counter';
+import { redditUrls } from '@/constants/redditUrls';
+import RedditPostsList from '@/components/reddit/RedditPostsList';
+import SubredditSelector from '@/components/reddit/Subreddits';
 
-export default function IndexPage() {
-    return <Counter />;
+export default async function HomePage() {
+    try {
+        // Server-side fetch for initial load
+        const response = await fetch(`${redditUrls.popular}`, {
+            next: { revalidate: 3600 },
+        });
+
+        const { data: { children } = {} } = await response.json();
+        console.log(children);
+
+        return (
+            <div className='mx-auto flex w-full items-center justify-between'>
+                <RedditPostsList initialPosts={children} />
+                <SubredditSelector />
+            </div>
+        );
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return <div>Failed to load Reddit posts</div>;
+    }
 }
 
 export const metadata: Metadata = {

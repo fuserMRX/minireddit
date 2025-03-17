@@ -2,56 +2,38 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import GlobalRedditSearch from '@/components/search/GlobalRedditSearch';
 import Theme from '@/components/Theme';
 
 export const Navbar = () => {
-    const pathname = usePathname();
-
     return (
-        // <nav className='flex flex-col items-center justify-center bg-slate-300 p-3 sm:flex-row sm:justify-between font-bold'>
-        //     <Link href='/' className='flex items-center justify-center'>
-        //         <Image
-        //             src='/assets/images/mini-reddit.svg'
-        //             width={200}
-        //             height={200}
-        //             alt='Mini Reddit'
-        //         />
-        //     </Link>
-        //     <GlobalRedditSearch />
-        //     <Theme />
-        // </nav>
-
-        <nav className='w-full bg-slate-300 p-3 font-bold'>
-            {/* We switch from flex-col on mobile to flex-row on sm: */}
+        <nav className='fixed w-full bg-slate-100 p-3 font-bold'>
             <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
-                {/* Row 1 on mobile => (logo left, theme right).
-            On large screens, we only keep the logo here. */}
+                {/* Row 1: Logo on left, Theme on right (for mobile) */}
                 <div className='flex w-full items-center justify-between sm:w-auto'>
-                    {/* Logo */}
+                    {/* Logo wrapped in a responsive container */}
                     <Link href='/' className='flex items-center'>
                         <Image
                             src='/assets/images/mini-reddit.svg'
                             width={200}
                             height={200}
                             alt='Mini Reddit'
+                            className='h-auto w-full'
                         />
                     </Link>
 
-                    {/* Theme (shown on mobile only). Hidden at sm: and above. */}
+                    {/* Theme visible on mobile only */}
                     <div className='sm:hidden'>
                         <Theme />
                     </div>
                 </div>
 
-                {/* Row 2 on mobile => search alone.
-            On large screens => search is in the middle (flex-1). */}
-                <div className='w-full sm:mx-4 sm:flex-1'>
+                {/* Row 2: Global search */}
+                <div className='flex w-full justify-center sm:mx-4 sm:flex-1'>
                     <GlobalRedditSearch />
                 </div>
 
-                {/* Theme (hidden on mobile, shown on large screens). */}
+                {/* Theme visible on larger screens */}
                 <div className='hidden sm:block'>
                     <Theme />
                 </div>
