@@ -2,7 +2,7 @@ import React from 'react';
 
 const Subreddits = () => {
   return (
-    <div>Subreddits</div>
+    <div className='max-sm:hidden'>Subreddits</div>
   );
 };
 

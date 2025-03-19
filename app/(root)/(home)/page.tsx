@@ -14,7 +14,7 @@ export default async function HomePage() {
         console.log(children);
 
         return (
-            <div className='mx-auto flex w-full items-center justify-between'>
+            <div className='mx-auto flex w-full items-center justify-between max-sm:pt-10'>
                 <RedditPostsList initialPosts={children} />
                 <SubredditSelector />
             </div>

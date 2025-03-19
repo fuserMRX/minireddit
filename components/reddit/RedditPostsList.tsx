@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useAppSelector } from '@/lib/redux/hooks';
 import Image from 'next/image';
+import { CircleChevronUp } from 'lucide-react';
+import { CircleChevronDown } from 'lucide-react';
 
 import {
     selectReddits,
@@ -98,14 +100,21 @@ export default function RedditPostsList({
                     key={post.data.id}
                     className='my-4 w-full sm:max-w-2xl md:max-w-5xl'
                 >
-                    <CardHeader>
-                        <CardTitle className='text-center'>
+                    <CardHeader className='relative flex flex-row items-center justify-between px-6'>
+                        <div className='flex flex-col items-center gap-4 rounded-md bg-black/5 px-2 py-1 text-sm font-medium'>
+                            <CircleChevronUp className='text-accent-foreground h-6 w-6 cursor-pointer' />
+                            <span>{formatLargeNumber(post.data.score)}</span>
+                            <CircleChevronDown className='text-accent-foreground h-6 w-6 cursor-pointer' />
+                        </div>
+
+                        <CardTitle className='mx-4 flex-1 text-center'>
                             {post.data.title}
                         </CardTitle>
                     </CardHeader>
+
                     <CardContent className='relative'>
                         {post.data.selftext ? (
-                            <div className='mb-4 max-h-60 overflow-y-auto'>
+                            <div className='mb-4 max-h-60 overflow-y-auto text-center'>
                                 <p>{post.data.selftext}</p>
                             </div>
                         ) : null}
@@ -114,9 +123,9 @@ export default function RedditPostsList({
                             {renderMedia(post)}
                         </div>
                     </CardContent>
-                    <CardFooter className='flex flex-wrap items-center gap-4'>
-                        {/* Author info group */}
-                        <div className='flex items-center gap-2'>
+
+                    <CardFooter className='flex flex-col items-start gap-4 px-4 sm:flex-row sm:items-center sm:justify-between'>
+                        <div className='flex w-full items-center justify-center gap-2 sm:w-auto'>
                             <Avatar>
                                 <AvatarImage
                                     src={`https://robohash.org/randomSeed${post.data.id}`}
@@ -128,21 +137,25 @@ export default function RedditPostsList({
                             <span className='text-accent-foreground font-medium'>
                                 {post.data.author}
                             </span>
+
+                            <p className='text-muted-foreground ml-2 text-sm'>
+                                in{' '}
+                                <span className='text-cyan-500'>
+                                    {post.data.subreddit}
+                                </span>
+                            </p>
                         </div>
 
-                        {/* Subreddit info */}
-                        <p className='text-muted-foreground text-sm'>
-                            in{' '}
-                            <span className='text-accent-foreground'>
-                                {post.data.subreddit}
+                        <div className='flex w-full justify-between gap-4 border-t pt-2 text-sm sm:w-auto sm:justify-end sm:border-0 sm:pt-0'>
+                            <span>
+                                {getTimestamp(
+                                    new Date(post.data.created_utc * 1000)
+                                )}
                             </span>
-                        </p>
-
-                        {/* Post metrics - pushed to the right */}
-                        <div className='ml-auto flex gap-4 text-sm'>
-                            <span>⬆️ {formatLargeNumber(post.data.score)} points</span>
-                            <span>{getTimestamp(new Date(post.data.created_utc * 1000))}</span>
-                            <span>💬 {post.data.num_comments} comments</span>
+                            <span className='cursor-pointer hover:text-cyan-600'>
+                                💬 {formatLargeNumber(post.data.num_comments)}{' '}
+                                comments
+                            </span>
                         </div>
                     </CardFooter>
                 </Card>
