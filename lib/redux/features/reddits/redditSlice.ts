@@ -2,6 +2,28 @@ import { createAppSlice } from '@/lib/redux/createAppSlice';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { fetchSubreddit } from '@/lib/redux/features/reddits/subredditAPI';
 
+// Interface for Reddit video data
+export interface RedditVideo {
+    bitrate_kbps: number;
+    fallback_url: string;
+    has_audio: boolean;
+    height: number;
+    width: number;
+    scrubber_media_url: string;
+    dash_url: string;
+    duration: number;
+    hls_url: string;
+    is_gif: boolean;
+    transcoding_status: string;
+}
+
+// Interface for Reddit media
+export interface RedditMedia {
+    reddit_video?: RedditVideo;
+    // Other potential media types can be added here
+    [key: string]: unknown;
+}
+
 // Interface for the data part of a Reddit item
 export interface RedditItemData {
     id: string;
@@ -15,10 +37,11 @@ export interface RedditItemData {
     num_comments: number;
     selftext?: string;
     thumbnail?: string;
-    media?: Record<string, unknown>;
+    media?: RedditMedia; // Updated to use the specific RedditMedia type
     created_utc: number;
     subreddit_name_prefixed: string;
     author_fullname?: string;
+    url_overridden_by_dest?: string;
     ups: number;
     downs: number;
     upvote_ratio?: number;

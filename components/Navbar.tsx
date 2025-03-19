@@ -7,7 +7,7 @@ import Theme from '@/components/Theme';
 
 export const Navbar = () => {
     return (
-        <nav className='fixed w-full bg-slate-100 p-3 font-bold'>
+        <nav className='fixed z-50 w-full bg-slate-100 p-3 font-bold'>
             <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
                 {/* Row 1: Logo on left, Theme on right (for mobile) */}
                 <div className='flex w-full items-center justify-between sm:w-auto'>
