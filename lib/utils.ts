@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { RedditItem, RedditItemData } from '@/lib/redux/features/reddits/redditSlice';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -40,4 +41,28 @@ export const formatLargeNumber = (num: number): string => {
     } else {
         return num.toString(); // Return the number as it is if less than 1,000
     }
+};
+
+export const extractSubreddits = (redditItems: RedditItem[]) => {
+    const allSubreddits = redditItems.map(
+        ({ data }: { data: RedditItemData }) => ({
+            subredditId: data.subreddit,
+            subredditUrl: `https://www.reddit.com/r/${data.subreddit}.json`,
+        })
+    );
+
+    const uniqueIds = new Set<string>();
+
+    // Filter to keep only unique subreddits
+    const uniqueSubreddits = allSubreddits.filter((subreddit) => {
+        if (uniqueIds.has(subreddit.subredditId)) {
+            return false;
+        }
+
+        uniqueIds.add(subreddit.subredditId);
+
+        return true;
+    });
+
+    return uniqueSubreddits;
 };
