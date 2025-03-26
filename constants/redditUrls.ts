@@ -1,7 +1,9 @@
-interface RedditUrls {
-    popular: string;
+interface RedditUrl {
+    subredditId: string;
+    subredditUrl: string;
 }
 
-export const redditUrls: RedditUrls = {
-    popular: 'https://www.reddit.com/r/popular.json',
+export const popularRedditUrl: RedditUrl = {
+    subredditId: 'popular',
+    subredditUrl: 'https://www.reddit.com/r/popular.json',
 };

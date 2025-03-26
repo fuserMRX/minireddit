@@ -1,6 +1,11 @@
+'use client';
+
 import React from 'react';
+import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { getAsyncSubredditInfo, selectActiveSubreddit } from '@/lib/redux/features/reddits/redditSlice';
 
 interface SubredditSelectorProps {
     subredditsData: {
@@ -23,6 +28,31 @@ const buttonColors = [
     'bg-orange-50 text-orange-700 hover:bg-orange-100',
 ];
 
+const getGlowColor = (subredditId: string): string => {
+    // Get the color key from the subreddit hash
+    const hash = subredditId.split('').reduce((acc, char) => {
+        return acc + char.charCodeAt(0);
+    }, 0);
+
+    const colorIndex = hash % buttonColors.length;
+
+    // Return appropriate ring color based on button theme
+    const ringColors = [
+        'hover:ring-blue-300',
+        'hover:ring-emerald-300',
+        'hover:ring-amber-300',
+        'hover:ring-purple-300',
+        'hover:ring-rose-300',
+        'hover:ring-cyan-300',
+        'hover:ring-fuchsia-300',
+        'hover:ring-lime-300',
+        'hover:ring-indigo-300',
+        'hover:ring-orange-300',
+    ];
+
+    return ringColors[colorIndex];
+};
+
 // Get consistent color for a subreddit
 const getSubredditColor = (subredditId: string): string => {
     // Simple hash function to get a consistent number from a string
@@ -35,6 +65,9 @@ const getSubredditColor = (subredditId: string): string => {
 };
 
 const Subreddits = ({ subredditsData }: SubredditSelectorProps) => {
+    const dispatch = useAppDispatch();
+    const activeSubreddit = useAppSelector(selectActiveSubreddit);
+
     return (
         <Card className='my-4 shadow-md transition-shadow duration-300 hover:shadow-lg'>
             <CardHeader className='bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-gray-800 dark:to-gray-900'>
@@ -48,13 +81,24 @@ const Subreddits = ({ subredditsData }: SubredditSelectorProps) => {
                         const colorClasses = getSubredditColor(
                             subreddit.subredditId
                         );
+                        const glowColor = getGlowColor(subreddit.subredditId);
+                        const activeGlowColor = glowColor.replace('hover:', '');
+                        const isActive = subreddit.subredditId === activeSubreddit;
 
                         return (
                             <Button
                                 key={subreddit.subredditId}
                                 variant='outline'
                                 size='sm'
-                                className={`w-full justify-start px-3 ${colorClasses} cursor-pointer`}
+                                onClick={() => {
+                                    if (!isActive) {
+                                        dispatch(getAsyncSubredditInfo(subreddit.subredditId));
+                                    }
+                                }}
+                                className={`w-full justify-start px-3 ${colorClasses} transition-all
+                                    duration-300 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]
+                                    hover:ring-2 hover:ring-offset-1 ${glowColor} cursor-pointer
+                                    ${isActive ? `ring-2 ring-offset-1 font-bold ${activeGlowColor}` : ''}`}
                                 data-js-url={subreddit.subredditUrl}
                             >
                                 <span className='block w-full truncate'>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { redditUrls } from '@/constants/redditUrls';
+import { popularRedditUrl } from '@/constants/redditUrls';
 import RedditPostsList from '@/components/reddit/RedditPostsList';
 import SubredditSelector from '@/components/reddit/Subreddits';
 import { extractSubreddits } from '@/lib/utils';
@@ -8,12 +8,18 @@ import { extractSubreddits } from '@/lib/utils';
 export default async function HomePage() {
     try {
         // Server-side fetch for initial load
-        const response = await fetch(`${redditUrls.popular}`, {
+        const response = await fetch(`${popularRedditUrl.subredditUrl}`, {
             next: { revalidate: 3600 },
         });
 
         const { data: { children } = {} } = await response.json();
         const subredditsData = extractSubreddits(children);
+
+        // Add popular subreddit but without isActive property
+        subredditsData.push({
+            subredditId: popularRedditUrl.subredditId,
+            subredditUrl: popularRedditUrl.subredditUrl
+        });
 
         return (
             <div className='mx-auto px-4 py-6 md:py-8 lg:px-8 lg:py-10'>

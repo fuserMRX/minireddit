@@ -58,11 +58,13 @@ export interface RedditItem {
 export interface RedditSliceState {
     value: RedditItem[];
     status: 'idle' | 'loading' | 'failed';
+    activeSubreddit: string;
 }
 
 const initialState: RedditSliceState = {
     value: [],
     status: 'idle',
+    activeSubreddit: 'popular',
 };
 
 // If you are not using async thunks you can use the standalone `createSlice`.
@@ -73,7 +75,11 @@ export const redditSlice = createAppSlice({
         getAsyncSubredditInfo: create.asyncThunk(
             async (subredditName: string) => {
                 const response = await fetchSubreddit(subredditName);
-                return response.data;
+
+                return {
+                    posts: response.data,
+                    activeSubreddit: subredditName
+                };
             },
             {
                 pending: (state) => {
@@ -81,7 +87,8 @@ export const redditSlice = createAppSlice({
                 },
                 fulfilled: (state, action) => {
                     state.status = 'idle';
-                    state.value = action.payload;
+                    state.value = action.payload.posts;
+                    state.activeSubreddit = action.payload.activeSubreddit;
                 },
                 rejected: (state) => {
                     state.status = 'failed';
@@ -98,8 +105,9 @@ export const redditSlice = createAppSlice({
     selectors: {
         selectStatus: (reddits) => reddits.status,
         selectReddits: (reddits) => reddits.value,
+        selectActiveSubreddit: (reddits) => reddits.activeSubreddit,
     },
 });
 
 export const { getAsyncSubredditInfo, updateReddits } = redditSlice.actions;
-export const { selectStatus, selectReddits } = redditSlice.selectors;
+export const { selectStatus, selectReddits, selectActiveSubreddit } = redditSlice.selectors;

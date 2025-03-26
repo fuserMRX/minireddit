@@ -139,7 +139,7 @@ export default function RedditPostsList({
                 return (
                     <Card
                         key={postId}
-                        className='my-4 w-full transition-all duration-200 hover:shadow-2xl border-gray-200'
+                        className='my-4 w-full min-w-0 transition-all duration-200 hover:shadow-2xl border-gray-200'
                     >
                         <CardHeader className='relative flex flex-row items-center justify-between px-6'>
                             <div className='flex flex-col items-center gap-4 rounded-md bg-black/5 px-2 py-1 text-sm font-medium'>
@@ -174,7 +174,7 @@ export default function RedditPostsList({
                                 </div>
                             ) : null}
 
-                            <div className='relative aspect-[16/9] [&:empty]:hidden'>
+                            <div className='relative aspect-[16/9] w-full [&:empty]:hidden'>
                                 {renderMedia(post)}
                             </div>
                         </CardContent>
