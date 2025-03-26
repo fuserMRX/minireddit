@@ -139,25 +139,34 @@ export default function RedditPostsList({
                 return (
                     <Card
                         key={postId}
-                        className='my-4 w-full min-w-0 transition-all duration-200 hover:shadow-2xl border-gray-200'
+                        className='my-4 w-full max-w-sm border-gray-200 transition-all duration-200 hover:shadow-2xl
+                        md:min-w-2 lg:max-w-7xl lg:min-w-5xl'
                     >
                         <CardHeader className='relative flex flex-row items-center justify-between px-6'>
                             <div className='flex flex-col items-center gap-4 rounded-md bg-black/5 px-2 py-1 text-sm font-medium'>
                                 <CircleChevronUp
-                                    onClick={() => handleVoting(postId, 'upvote')}
+                                    onClick={() =>
+                                        handleVoting(postId, 'upvote')
+                                    }
                                     name='upvote'
                                     className={`h-6 w-6 cursor-pointer ${
-                                        voteState.upvoted ? 'text-green-500' : 'text-accent-foreground'
+                                        voteState.upvoted
+                                            ? 'text-green-500'
+                                            : 'text-accent-foreground'
                                     }`}
                                 />
                                 <span>
                                     {formatLargeNumber(post.data.score)}
                                 </span>
                                 <CircleChevronDown
-                                    onClick={() => handleVoting(postId, 'downvote')}
+                                    onClick={() =>
+                                        handleVoting(postId, 'downvote')
+                                    }
                                     name='downvote'
                                     className={`h-6 w-6 cursor-pointer ${
-                                        voteState.downvoted ? 'text-red-500' : 'text-accent-foreground'
+                                        voteState.downvoted
+                                            ? 'text-red-500'
+                                            : 'text-accent-foreground'
                                     }`}
                                 />
                             </div>
@@ -169,7 +178,7 @@ export default function RedditPostsList({
 
                         <CardContent className='relative'>
                             {post.data.selftext ? (
-                                <div className='mb-4 max-h-60 overflow-y-auto text-center'>
+                                <div className='mb-4 max-h-60 max-w-7xl overflow-auto text-center text-wrap'>
                                     <p>{post.data.selftext}</p>
                                 </div>
                             ) : null}

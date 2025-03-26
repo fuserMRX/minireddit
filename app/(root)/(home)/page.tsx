@@ -30,7 +30,7 @@ export default async function HomePage() {
                     </div>
 
                     {/* Sidebar - guarantee wider size */}
-                    <div className='w-full lg:sticky lg:top-20 lg:w-2/5 lg:self-start xl:w-1/3'>
+                    <div className='w-full lg:sticky lg:top-20 lg:ml-25 lg:w-2/5 lg:self-start xl:w-1/3'>
                         <SubredditSelector subredditsData={subredditsData} />
                     </div>
                 </div>
