@@ -1,11 +1,13 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
+
 import { useState, useEffect } from 'react';
 import { useAppSelector } from '@/lib/redux/hooks';
-import Image from 'next/image';
 import { CircleChevronUp } from 'lucide-react';
 import { CircleChevronDown } from 'lucide-react';
+import RedditPostsListLoader from '@/components/reddit/RedditPostsListLoader';
 
 import {
     selectReddits,
@@ -93,7 +95,7 @@ export default function RedditPostsList({
     }, [redditPosts]);
 
     if (usingReduxData && loadingStatus === 'loading') {
-        return <div>Loading subreddit posts...</div>;
+        return <RedditPostsListLoader/>;
     }
 
     // Handle voting with proper state management

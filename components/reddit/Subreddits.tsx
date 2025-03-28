@@ -5,7 +5,14 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getAsyncSubredditInfo, selectActiveSubreddit } from '@/lib/redux/features/reddits/redditSlice';
+import {
+    getAsyncSubredditInfo,
+    selectActiveSubreddit,
+    selectSubredditStatus,
+    setSubredditStatus
+} from '@/lib/redux/features/reddits/redditSlice';
+
+import SubbredditsLoader from '@/components/reddit/SubbredditsLoader';
 
 interface SubredditSelectorProps {
     subredditsData: {
@@ -67,6 +74,14 @@ const getSubredditColor = (subredditId: string): string => {
 const Subreddits = ({ subredditsData }: SubredditSelectorProps) => {
     const dispatch = useAppDispatch();
     const activeSubreddit = useAppSelector(selectActiveSubreddit);
+    const subredditStatus = useAppSelector(selectSubredditStatus);
+
+    // Show loading skeleton when subreddit is being loaded
+    if (subredditStatus === 'loading') {
+        return (
+            <SubbredditsLoader />
+        );
+    }
 
     return (
         <Card className='my-4 shadow-md transition-shadow duration-300 hover:shadow-lg'>
@@ -92,6 +107,9 @@ const Subreddits = ({ subredditsData }: SubredditSelectorProps) => {
                                 size='sm'
                                 onClick={() => {
                                     if (!isActive) {
+                                        // First set the loading status to show the skeleton
+                                        dispatch(setSubredditStatus('loading'));
+                                        // Then fetch the data
                                         dispatch(getAsyncSubredditInfo(subreddit.subredditId));
                                     }
                                 }}

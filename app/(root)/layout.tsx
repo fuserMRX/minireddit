@@ -1,6 +1,5 @@
 import React from 'react';
 import { Navbar } from '@/components/Navbar';
-import Toaster from '@/components/Toaster';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -11,8 +10,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     <div className='mx-auto max-w-max'>{children}</div>
                 </section>
             </div>
-
-            <Toaster />
         </main>
     );
 };

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { popularRedditUrl } from '@/constants/redditUrls';
 import RedditPostsList from '@/components/reddit/RedditPostsList';
-import SubredditSelector from '@/components/reddit/Subreddits';
+import Subreddits from '@/components/reddit/Subreddits';
 import { extractSubreddits } from '@/lib/utils';
 
 export default async function HomePage() {
@@ -31,7 +31,7 @@ export default async function HomePage() {
 
                     {/* Sidebar - guarantee wider size */}
                     <div className='w-full lg:sticky lg:top-20 lg:ml-25 lg:w-2/5 lg:self-start xl:w-1/3'>
-                        <SubredditSelector subredditsData={subredditsData} />
+                        <Subreddits subredditsData={subredditsData} />
                     </div>
                 </div>
             </div>

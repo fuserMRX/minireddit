@@ -57,14 +57,16 @@ export interface RedditItem {
 
 export interface RedditSliceState {
     value: RedditItem[];
-    status: 'idle' | 'loading' | 'failed';
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
     activeSubreddit: string;
+    subredditStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
 }
 
 const initialState: RedditSliceState = {
     value: [],
     status: 'idle',
     activeSubreddit: 'popular',
+    subredditStatus: 'idle',
 };
 
 // If you are not using async thunks you can use the standalone `createSlice`.
@@ -84,14 +86,17 @@ export const redditSlice = createAppSlice({
             {
                 pending: (state) => {
                     state.status = 'loading';
+                    state.subredditStatus = 'loading';
                 },
                 fulfilled: (state, action) => {
-                    state.status = 'idle';
+                    state.status = 'succeeded';
+                    state.subredditStatus = 'succeeded';
                     state.value = action.payload.posts;
                     state.activeSubreddit = action.payload.activeSubreddit;
                 },
                 rejected: (state) => {
                     state.status = 'failed';
+                    state.subredditStatus = 'failed';
                 },
             }
         ),
@@ -100,14 +105,20 @@ export const redditSlice = createAppSlice({
                 state.value = action.payload;
             }
         ),
+        setSubredditStatus: create.reducer(
+            (state, action: PayloadAction<'idle' | 'loading' | 'succeeded' | 'failed'>) => {
+                state.subredditStatus = action.payload;
+            }
+        ),
     }),
 
     selectors: {
         selectStatus: (reddits) => reddits.status,
         selectReddits: (reddits) => reddits.value,
         selectActiveSubreddit: (reddits) => reddits.activeSubreddit,
+        selectSubredditStatus: (reddits) => reddits.subredditStatus,
     },
 });
 
-export const { getAsyncSubredditInfo, updateReddits } = redditSlice.actions;
-export const { selectStatus, selectReddits, selectActiveSubreddit } = redditSlice.selectors;
+export const { getAsyncSubredditInfo, updateReddits, setSubredditStatus } = redditSlice.actions;
+export const { selectStatus, selectReddits, selectActiveSubreddit, selectSubredditStatus } = redditSlice.selectors;
