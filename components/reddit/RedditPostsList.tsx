@@ -2,16 +2,16 @@
 
 import React from 'react';
 import Image from 'next/image';
-
 import { useState, useEffect } from 'react';
-import { useAppSelector } from '@/lib/redux/hooks';
+import { useAppSelector, useAppDispatch } from '@/lib/redux/hooks';
 import { CircleChevronUp } from 'lucide-react';
 import { CircleChevronDown } from 'lucide-react';
-import RedditPostsListLoader from '@/components/reddit/RedditPostsListLoader';
 
+import RedditPostsListLoader from '@/components/reddit/RedditPostsListLoader';
 import {
     selectReddits,
     selectStatus,
+    updateReddits,
 } from '@/lib/redux/features/reddits/redditSlice';
 import {
     Card,
@@ -81,21 +81,26 @@ const renderMedia = (post: RedditItem) => {
 export default function RedditPostsList({
     initialPosts,
 }: RedditPostsListProps) {
-    const [usingReduxData, setUsingReduxData] = useState(false);
+    const dispatch = useAppDispatch();
     const [votes, setVotes] = useState<Record<string, { upvoted: boolean; downvoted: boolean }>>({});
 
     const redditPosts = useAppSelector(selectReddits);
     const loadingStatus = useAppSelector(selectStatus);
-    const postsToDisplay = usingReduxData ? redditPosts : initialPosts;
 
+    // Initialize Redux with initialPosts to prevent layout shift
     useEffect(() => {
-        if (redditPosts.length > 0) {
-            setUsingReduxData(true);
+        // Only update Redux if it's empty and we have initialPosts
+        if (redditPosts.length === 0 && initialPosts.length) {
+            dispatch(updateReddits(initialPosts));
         }
-    }, [redditPosts]);
+    }, [initialPosts, redditPosts.length, dispatch]);
 
-    if (usingReduxData && loadingStatus === 'loading') {
-        return <RedditPostsListLoader/>;
+    // Always use redditPosts after initialization
+    const postsToDisplay = redditPosts.length ? redditPosts : initialPosts;
+
+    // Show loading skeleton only when explicitly loading from Redux actions (like subreddit switching)
+    if (redditPosts.length > 0 && loadingStatus === 'loading') {
+        return <RedditPostsListLoader />;
     }
 
     // Handle voting with proper state management
