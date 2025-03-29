@@ -146,8 +146,8 @@ export default function RedditPostsList({
                 return (
                     <Card
                         key={postId}
-                        className='my-4 w-full max-w-sm border-gray-200 transition-all duration-200 hover:shadow-2xl
-                        md:min-w-2 lg:max-w-7xl lg:min-w-5xl'
+                        className='my-4 w-full max-w-sm border-gray-200 transition-all duration-200 hover:shadow-2xl sm:min-w-sm md:min-w-md
+                        lg:max-w-7xl lg:min-w-5xl'
                     >
                         <CardHeader className='relative flex flex-row items-center justify-between px-6'>
                             <div className='flex flex-col items-center gap-4 rounded-md bg-black/5 px-2 py-1 text-sm font-medium'>
