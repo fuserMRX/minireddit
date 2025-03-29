@@ -30,6 +30,13 @@ const GlobalRedditSearch = () => {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [activeSubredditName, setActiveSubredditName] = useState<string>('');
 
+    const form = useForm<z.infer<typeof SearchSchema>>({
+        resolver: zodResolver(SearchSchema),
+        defaultValues: {
+            querySearch: '',
+        },
+    });
+
     // Update originalPosts whenever allPosts changes due to subreddit selection
     useEffect(() => {
         if ((originalPosts.length === 0) || (activeSubreddit !== activeSubredditName)) {
@@ -38,12 +45,10 @@ const GlobalRedditSearch = () => {
         }
     }, [allPosts, activeSubreddit, originalPosts.length, activeSubredditName]);
 
-    const form = useForm<z.infer<typeof SearchSchema>>({
-        resolver: zodResolver(SearchSchema),
-        defaultValues: {
-            querySearch: '',
-        },
-    });
+    // Reset form when subreddit changes
+    useEffect(() => {
+        form.reset({ querySearch: '' });
+    }, [activeSubreddit, form]);
 
     const handleSearch = async (values: z.infer<typeof SearchSchema>) => {
         setIsSubmitting(true);
