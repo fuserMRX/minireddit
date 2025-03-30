@@ -4,8 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/lib/redux/hooks';
-import { CircleChevronUp } from 'lucide-react';
-import { CircleChevronDown } from 'lucide-react';
+import { CircleChevronUp, CircleChevronDown, MessageCircle } from 'lucide-react';
 
 import RedditPostsListLoader from '@/components/reddit/RedditPostsListLoader';
 import {
@@ -23,6 +22,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getTimestamp, formatLargeNumber } from '@/lib/utils';
 import type { RedditItem } from '@/lib/redux/features/reddits/redditSlice';
+import RedditComments from '@/components/reddit/RedditComments';
 
 interface RedditPostsListProps {
     initialPosts: RedditItem[];
@@ -83,6 +83,7 @@ export default function RedditPostsList({
 }: RedditPostsListProps) {
     const dispatch = useAppDispatch();
     const [votes, setVotes] = useState<Record<string, { upvoted: boolean; downvoted: boolean }>>({});
+    const [expandedComments, setExpandedComments] = useState<string | null>(null);
 
     const redditPosts = useAppSelector(selectReddits);
     const loadingStatus = useAppSelector(selectStatus);
@@ -142,6 +143,8 @@ export default function RedditPostsList({
                     upvoted: false,
                     downvoted: false,
                 };
+
+                const isCommentsExpanded = expandedComments === postId;
 
                 return (
                     <Card
@@ -223,13 +226,27 @@ export default function RedditPostsList({
                                         new Date(post.data.created_utc * 1000)
                                     )}
                                 </span>
-                                <span className='cursor-pointer hover:text-cyan-600'>
-                                    💬{' '}
+                                <button
+                                    className={`flex items-center cursor-pointer hover:text-cyan-600 ${isCommentsExpanded ? 'text-cyan-600' : ''}`}
+                                    onClick={() => setExpandedComments(isCommentsExpanded ? null : postId)}
+                                >
+                                    <MessageCircle className="h-4 w-4 mr-1" />
                                     {formatLargeNumber(post.data.num_comments)}{' '}
                                     comments
-                                </span>
+                                </button>
                             </div>
                         </CardFooter>
+
+                        {/* Comments section - only shown when expanded */}
+                        {isCommentsExpanded && (
+                            <div className="px-4 pb-4">
+                                <RedditComments
+                                    postId={postId}
+                                    subreddit={post.data.subreddit}
+                                    totalComments={post.data.num_comments}
+                                />
+                            </div>
+                        )}
                     </Card>
                 );
             })}

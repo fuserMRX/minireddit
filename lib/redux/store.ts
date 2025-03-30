@@ -1,12 +1,10 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit';
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
-import { counterSlice } from '@/lib/redux/features/counter/counterSlice';
-import { quotesApiSlice } from '@/lib/redux/features/quotes/quotesApiSlice';
 import { redditSlice } from '@/lib/redux/features/reddits/redditSlice';
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, redditSlice);
+const rootReducer = combineSlices(redditSlice);
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -20,7 +18,7 @@ export const makeStore = () => {
         // Adding the api middleware enables caching, invalidation, polling,
         // and other useful features of `rtk-query`.
         middleware: (getDefaultMiddleware) => {
-            return getDefaultMiddleware().concat(quotesApiSlice.middleware);
+            return getDefaultMiddleware();
         },
     });
 };
