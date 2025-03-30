@@ -149,17 +149,16 @@ export default function RedditPostsList({
                 return (
                     <Card
                         key={postId}
-                        className='my-4 w-full max-w-sm border-gray-200 transition-all duration-200 hover:shadow-2xl sm:min-w-sm md:min-w-md
-                        lg:max-w-7xl lg:min-w-5xl'
+                        className='my-4 w-full border-gray-200 transition-all duration-200 hover:shadow-2xl'
                     >
-                        <CardHeader className='relative flex flex-row items-center justify-between px-6'>
-                            <div className='flex flex-col items-center gap-4 rounded-md bg-black/5 px-2 py-1 text-sm font-medium'>
+                        <CardHeader className='relative flex flex-row items-center justify-between px-3 sm:px-6'>
+                            <div className='flex flex-col items-center gap-2 sm:gap-4 rounded-md bg-black/5 px-1 sm:px-2 py-1 text-sm font-medium'>
                                 <CircleChevronUp
                                     onClick={() =>
                                         handleVoting(postId, 'upvote')
                                     }
                                     name='upvote'
-                                    className={`h-6 w-6 cursor-pointer ${
+                                    className={`h-5 w-5 sm:h-6 sm:w-6 cursor-pointer ${
                                         voteState.upvoted
                                             ? 'text-green-500'
                                             : 'text-accent-foreground'
@@ -173,7 +172,7 @@ export default function RedditPostsList({
                                         handleVoting(postId, 'downvote')
                                     }
                                     name='downvote'
-                                    className={`h-6 w-6 cursor-pointer ${
+                                    className={`h-5 w-5 sm:h-6 sm:w-6 cursor-pointer ${
                                         voteState.downvoted
                                             ? 'text-red-500'
                                             : 'text-accent-foreground'
@@ -181,14 +180,14 @@ export default function RedditPostsList({
                                 />
                             </div>
 
-                            <CardTitle className='mx-4 flex-1 text-center'>
+                            <CardTitle className='mx-2 sm:mx-4 flex-1 text-center text-base sm:text-lg md:text-xl'>
                                 {post.data.title}
                             </CardTitle>
                         </CardHeader>
 
-                        <CardContent className='relative'>
+                        <CardContent className='relative px-3 sm:px-6'>
                             {post.data.selftext ? (
-                                <div className='mb-4 max-h-60 max-w-7xl overflow-auto text-center text-wrap'>
+                                <div className='mb-4 max-h-60 overflow-auto text-center text-wrap text-sm sm:text-base'>
                                     <p>{post.data.selftext}</p>
                                 </div>
                             ) : null}
@@ -198,9 +197,9 @@ export default function RedditPostsList({
                             </div>
                         </CardContent>
 
-                        <CardFooter className='flex flex-col items-start gap-4 px-4 sm:flex-row sm:items-center sm:justify-between'>
+                        <CardFooter className='flex flex-col items-start gap-4 px-3 sm:px-4 pb-3 sm:flex-row sm:items-center sm:justify-between'>
                             <div className='flex w-full items-center justify-center gap-2 sm:w-auto'>
-                                <Avatar>
+                                <Avatar className="h-6 w-6 sm:h-8 sm:w-8">
                                     <AvatarImage
                                         src={`https://robohash.org/randomSeed${post.data.id}`}
                                     />
@@ -208,11 +207,11 @@ export default function RedditPostsList({
                                         {post.data.author}
                                     </AvatarFallback>
                                 </Avatar>
-                                <span className='text-accent-foreground font-medium'>
+                                <span className='text-accent-foreground font-medium text-sm sm:text-base'>
                                     {post.data.author}
                                 </span>
 
-                                <p className='text-muted-foreground ml-2 text-sm'>
+                                <p className='text-muted-foreground ml-2 text-xs sm:text-sm'>
                                     in{' '}
                                     <span className='text-cyan-500'>
                                         {post.data.subreddit}
@@ -220,7 +219,7 @@ export default function RedditPostsList({
                                 </p>
                             </div>
 
-                            <div className='flex w-full justify-between gap-4 border-t pt-2 text-sm sm:w-auto sm:justify-end sm:border-0 sm:pt-0'>
+                            <div className='flex w-full justify-between gap-4 border-t pt-2 text-xs sm:text-sm sm:w-auto sm:justify-end sm:border-0 sm:pt-0'>
                                 <span>
                                     {getTimestamp(
                                         new Date(post.data.created_utc * 1000)
@@ -230,7 +229,7 @@ export default function RedditPostsList({
                                     className={`flex items-center cursor-pointer hover:text-cyan-600 ${isCommentsExpanded ? 'text-cyan-600' : ''}`}
                                     onClick={() => setExpandedComments(isCommentsExpanded ? null : postId)}
                                 >
-                                    <MessageCircle className="h-4 w-4 mr-1" />
+                                    <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                                     {formatLargeNumber(post.data.num_comments)}{' '}
                                     comments
                                 </button>
@@ -239,7 +238,7 @@ export default function RedditPostsList({
 
                         {/* Comments section - only shown when expanded */}
                         {isCommentsExpanded && (
-                            <div className="px-4 pb-4">
+                            <div className="px-3 sm:px-4 pb-4">
                                 <RedditComments
                                     postId={postId}
                                     subreddit={post.data.subreddit}

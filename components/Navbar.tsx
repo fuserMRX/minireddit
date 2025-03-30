@@ -7,8 +7,8 @@ import Theme from '@/components/Theme';
 
 export const Navbar = () => {
     return (
-        <nav className='fixed z-50 w-full bg-card border-b border-border p-3 font-bold transition-colors'>
-            <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
+        <nav className='fixed z-50 w-full bg-card border-b border-border p-2 sm:p-3 font-bold transition-colors'>
+            <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between max-w-[1920px] mx-auto'>
                 {/* Row 1: Logo on left, Theme on right (for mobile) */}
                 <div className='flex w-full items-center justify-between sm:w-auto'>
                     {/* Logo wrapped in a responsive container */}
@@ -19,6 +19,7 @@ export const Navbar = () => {
                             height={200}
                             alt='Mini Reddit'
                             className='h-auto w-full'
+                            priority
                         />
                     </Link>
 
@@ -29,7 +30,7 @@ export const Navbar = () => {
                 </div>
 
                 {/* Row 2: Global search */}
-                <div className='flex w-full justify-center sm:mx-4 sm:flex-1'>
+                <div className='flex w-full justify-center sm:mx-4 sm:flex-1 max-w-xl'>
                     <GlobalRedditSearch />
                 </div>
 
