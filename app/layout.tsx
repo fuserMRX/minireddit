@@ -16,7 +16,35 @@ export default function RootLayout({
 }>) {
     return (
         <StoreProvider>
-            <html lang='en'>
+            <html lang='en' suppressHydrationWarning>
+                <head>
+                    {/* Inline script to prevent theme flashing */}
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                (function() {
+                                    function getThemePreference() {
+                                        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                                            return localStorage.getItem('theme');
+                                        }
+                                        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                                    }
+                                    
+                                    const theme = getThemePreference();
+                                    
+                                    if (theme === 'dark') {
+                                        document.documentElement.classList.add('dark');
+                                    } else {
+                                        document.documentElement.classList.remove('dark');
+                                    }
+                                    
+                                    // Set a visual state to indicate theme is initialized
+                                    document.documentElement.setAttribute('data-theme-initialized', 'true');
+                                })();
+                            `,
+                        }}
+                    />
+                </head>
                 <body
                     className={`${redhat.variable} antialiased`}
                 >

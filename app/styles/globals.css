@@ -11,6 +11,20 @@
     --font-redhat-mono: var(--font-redhat-mono);
 }
 
+/* Prevent theme flash */
+:root {
+    color-scheme: light;
+}
+
+.dark {
+    color-scheme: dark;
+}
+
+/* Block content until theme is initialized to prevent flashing */
+html:not([data-theme-initialized]) {
+    visibility: hidden;
+}
+
 @layer base {}
 
 @layer components {}
