@@ -44,7 +44,7 @@ const RedditComments = ({ postId, subreddit, totalComments }: { postId: string; 
     }
 
     if (error) {
-        return <div className="mt-4 p-4 text-red-500 text-center">{error}</div>;
+        return <div className="mt-4 p-4 text-red-500 text-center" data-testid="error-message">{error}</div>;
     }
 
     return (
@@ -52,7 +52,7 @@ const RedditComments = ({ postId, subreddit, totalComments }: { postId: string; 
             <h3 className="text-lg font-medium mb-2">Comments ({totalComments})</h3>
 
             {totalComments > comments.length && (
-                <div className="mb-4 p-2 bg-blue-50 text-blue-700 text-xs rounded-md dark:bg-blue-900/30 dark:text-blue-300">
+                <div className="mb-4 p-2 bg-blue-50 text-blue-700 text-xs rounded-md dark:bg-blue-900/30 dark:text-blue-300" data-testid="comments-notification">
                     <p>Showing {comments.length} top-level comments. Visit Reddit to see all {totalComments} comments including replies.</p>
                 </div>
             )}

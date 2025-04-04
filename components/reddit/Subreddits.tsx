@@ -84,7 +84,7 @@ const Subreddits = ({ subredditsData }: SubredditSelectorProps) => {
     }
 
     return (
-        <Card className='my-4 shadow-md transition-shadow duration-300 hover:shadow-lg bg-card'>
+        <Card className='my-4 shadow-md transition-shadow duration-300 hover:shadow-lg bg-card' data-testid="subreddits-section">
             <CardHeader className='bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 pb-2 sm:pb-3'>
                 <CardTitle className='text-center text-lg sm:text-xl md:text-2xl'>
                     Popular Subreddits
@@ -119,6 +119,7 @@ const Subreddits = ({ subredditsData }: SubredditSelectorProps) => {
                                     ${isActive ? `ring-2 ring-offset-1 font-bold ${activeGlowColor}` : ''}
                                     text-xs sm:text-sm md:text-base py-1.5 sm:py-2 md:py-2.5 h-auto`}
                                 data-js-url={subreddit.subredditUrl}
+                                data-testid="subreddit-button"
                             >
                                 <span className='block w-full truncate'>
                                     {subreddit.subredditId}

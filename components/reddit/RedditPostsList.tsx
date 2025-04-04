@@ -150,6 +150,7 @@ export default function RedditPostsList({
                     <Card
                         key={postId}
                         className='my-4 w-full border-gray-200 transition-all duration-200 hover:shadow-2xl'
+                        data-testid="reddit-post"
                     >
                         <CardHeader className='relative flex flex-row items-center justify-between px-3 sm:px-6'>
                             <div className='flex flex-col items-center gap-2 sm:gap-4 rounded-md bg-black/5 px-1 sm:px-2 py-1 text-sm font-medium'>
@@ -228,6 +229,7 @@ export default function RedditPostsList({
                                 <button
                                     className={`flex items-center cursor-pointer hover:text-cyan-600 ${isCommentsExpanded ? 'text-cyan-600' : ''}`}
                                     onClick={() => setExpandedComments(isCommentsExpanded ? null : postId)}
+                                    data-testid="comment-button"
                                 >
                                     <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                                     {formatLargeNumber(post.data.num_comments)}{' '}
@@ -238,7 +240,7 @@ export default function RedditPostsList({
 
                         {/* Comments section - only shown when expanded */}
                         {isCommentsExpanded && (
-                            <div className="px-3 sm:px-4 pb-4">
+                            <div className="px-3 sm:px-4 pb-4" data-testid="comments-section">
                                 <RedditComments
                                     postId={postId}
                                     subreddit={post.data.subreddit}

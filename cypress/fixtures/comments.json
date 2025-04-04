@@ -1,0 +1,73 @@
+[
+    {
+        "id": "comment1",
+        "author": "react_user",
+        "body": "I've been using hooks for a while now and they've completely changed how I build components. The useEffect hook in particular has been a game changer for managing side effects.",
+        "created_utc": 1679840000,
+        "score": 45,
+        "replies": [
+            {
+                "id": "reply1",
+                "author": "hooks_fan",
+                "body": "Agreed! I also find useReducer really helpful for complex state management instead of multiple useState calls.",
+                "created_utc": 1679850000,
+                "score": 22
+            },
+            {
+                "id": "reply2",
+                "author": "dev_helper",
+                "body": "Don't forget about custom hooks! They're excellent for extracting reusable logic.",
+                "created_utc": 1679860000,
+                "score": 18
+            }
+        ]
+    },
+    {
+        "id": "comment2",
+        "author": "web_expert",
+        "body": "One thing that's often overlooked with hooks is the dependency array in useEffect. Make sure you understand it well to avoid infinite renders!",
+        "created_utc": 1679865000,
+        "score": 38,
+        "replies": []
+    },
+    {
+        "id": "comment3",
+        "author": "code_mentor",
+        "body": "Great post! I'd also recommend looking into the useCallback and useMemo hooks for performance optimization, especially in larger applications.",
+        "created_utc": 1679870000,
+        "score": 32,
+        "replies": [
+            {
+                "id": "reply3",
+                "author": "performance_guru",
+                "body": "Absolutely, but be careful not to over-optimize. Sometimes the overhead of these hooks isn't worth it for simple components.",
+                "created_utc": 1679875000,
+                "score": 15
+            }
+        ]
+    },
+    {
+        "id": "comment4",
+        "author": "junior_dev",
+        "body": "Can someone explain the difference between useEffect and useLayoutEffect? I'm still confused about when to use which one.",
+        "created_utc": 1679880000,
+        "score": 12,
+        "replies": [
+            {
+                "id": "reply4",
+                "author": "senior_dev",
+                "body": "useLayoutEffect runs synchronously after DOM mutations but before the browser paints, while useEffect runs asynchronously after paint. Use useLayoutEffect when you need to measure DOM elements or prevent visual flicker.",
+                "created_utc": 1679885000,
+                "score": 28
+            }
+        ]
+    },
+    {
+        "id": "comment5",
+        "author": "library_author",
+        "body": "If you're building libraries or reusable components, consider how hooks affect your API design. Sometimes class components still make sense for certain use cases.",
+        "created_utc": 1679890000,
+        "score": 19,
+        "replies": []
+    }
+]

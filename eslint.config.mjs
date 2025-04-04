@@ -1,6 +1,9 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { FlatCompat } from '@eslint/eslintrc';
+import pluginCypress from 'eslint-plugin-cypress/flat';
+import pluginChaiFriendly from 'eslint-plugin-chai-friendly';
+import pluginMocha from 'eslint-plugin-mocha';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -56,6 +59,22 @@ const eslintConfig = [
             'keyword-spacing': 2,
         },
     },
+    // Use Mocha plugin for test structure best practices
+    pluginMocha.configs.flat.recommended,
+    // Use Cypress plugin configuration instead of manual setup
+    pluginCypress.configs.recommended,
+    // Add Chai Friendly plugin for better assertion compatibility
+    pluginChaiFriendly.configs.recommendedFlat,
+    {
+        // Override specific rules as needed
+        rules: {
+            'cypress/no-unnecessary-waiting': 'off',    // Allow cy.wait() when needed for test stability
+            'cypress/unsafe-to-chain-command': 'warn',  // Warn on potentially unsafe command chaining
+            'mocha/no-exclusive-tests': 'error',  // Error on .only to prevent accidental commits
+            'mocha/no-skipped-tests': 'warn',     // Warn on .skip to remind about skipped tests
+            'mocha/no-mocha-arrows': 'off'        // Allow arrow functions in tests
+        }
+    }
 ];
 
 export default eslintConfig;

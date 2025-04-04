@@ -81,6 +81,7 @@ const GlobalRedditSearch = () => {
             <form
                 onSubmit={form.handleSubmit(handleSearch)}
                 className='flex w-full items-center justify-center gap-1'
+                data-testid="search-results"
             >
                 <div className=''>
                     <Button
@@ -103,6 +104,7 @@ const GlobalRedditSearch = () => {
                                     maxLength={20}
                                     placeholder='Search in subreddit'
                                     className='text-center bg-background placeholder:text-neutral-400'
+                                    data-testid="search-input"
                                     {...field}
                                 />
                             </FormControl>

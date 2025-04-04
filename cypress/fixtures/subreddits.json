@@ -1,0 +1,47 @@
+[
+    {
+        "name": "programming",
+        "display_name": "r/programming",
+        "title": "Programming",
+        "description": "Computer Programming",
+        "subscribers": 5000000,
+        "active_users": 12000,
+        "icon_img": "https://example.com/programming.png"
+    },
+    {
+        "name": "javascript",
+        "display_name": "r/javascript",
+        "title": "JavaScript",
+        "description": "All about JavaScript",
+        "subscribers": 2000000,
+        "active_users": 5000,
+        "icon_img": "https://example.com/javascript.png"
+    },
+    {
+        "name": "webdev",
+        "display_name": "r/webdev",
+        "title": "Web Development",
+        "description": "Web Development discussions",
+        "subscribers": 1500000,
+        "active_users": 4000,
+        "icon_img": "https://example.com/webdev.png"
+    },
+    {
+        "name": "reactjs",
+        "display_name": "r/reactjs",
+        "title": "React.js",
+        "description": "React JavaScript library",
+        "subscribers": 1000000,
+        "active_users": 3000,
+        "icon_img": "https://example.com/reactjs.png"
+    },
+    {
+        "name": "nextjs",
+        "display_name": "r/nextjs",
+        "title": "Next.js",
+        "description": "The React Framework",
+        "subscribers": 500000,
+        "active_users": 2000,
+        "icon_img": "https://example.com/nextjs.png"
+    }
+]

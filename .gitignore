@@ -44,3 +44,6 @@ next-env.d.ts
 .vscode
 *.code-workspace
 .history/
+# cypress
+/cypress/screenshots
+/cypress/videos

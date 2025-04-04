@@ -43,6 +43,7 @@ const Theme = () => {
             onClick={toggleTheme}
             className="flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background p-2 text-muted-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
             aria-label="Toggle theme"
+            data-testid="theme-toggle"
         >
             {isDarkMode ? (
                 <Sun className="h-5 w-5" />

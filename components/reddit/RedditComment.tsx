@@ -35,7 +35,7 @@ const RedditComment = ({ comment, depth = 0 }: { comment: RedditComment; depth?:
         : [];
 
     return (
-        <div className={`mt-3 pl-3 border-l-2 ${depth % 2 === 0 ? 'border-blue-200' : 'border-purple-200'}`}>
+        <div className={`mt-3 pl-3 border-l-2 ${depth % 2 === 0 ? 'border-blue-200' : 'border-purple-200'}`} data-testid="comment">
             <div className="flex items-start gap-2">
                 <Avatar className="h-6 w-6">
                     <AvatarImage src={`https://robohash.org/randomSeed${comment.data.id}`} />
@@ -43,7 +43,7 @@ const RedditComment = ({ comment, depth = 0 }: { comment: RedditComment; depth?:
                 </Avatar>
                 <div className="flex-1">
                     <div className="flex items-center gap-2">
-                        <span className="font-medium text-sm">{comment.data.author}</span>
+                        <span className="font-medium text-sm" data-testid="comment-author">{comment.data.author}</span>
                         <span className="text-xs text-muted-foreground">
                             {getTimestamp(new Date(comment.data.created_utc * 1000))}
                         </span>
@@ -51,20 +51,21 @@ const RedditComment = ({ comment, depth = 0 }: { comment: RedditComment; depth?:
                             {comment.data.score !== undefined ? formatLargeNumber(comment.data.score) : '0'} points
                         </span>
                     </div>
-                    <div className="text-sm mt-1">{comment.data.body}</div>
+                    <div className="text-sm mt-1" data-testid="comment-body">{comment.data.body}</div>
 
                     {hasReplies && replies.length > 0 && (
                         <div className="mt-2">
                             <button
                                 onClick={() => setShowReplies(!showReplies)}
                                 className="flex items-center text-xs text-blue-500 hover:text-blue-700"
+                                data-testid="show-replies-button"
                             >
                                 {showReplies ? <ChevronUp className="h-3 w-3 mr-1" /> : <ChevronDown className="h-3 w-3 mr-1" />}
                                 {showReplies ? 'Hide' : 'Show'} {replies.length} {replies.length === 1 ? 'reply' : 'replies'}
                             </button>
 
                             {showReplies && (
-                                <div className="mt-1">
+                                <div className="mt-1" data-testid="replies-container">
                                     {replies.map((reply) => (
                                         <RedditComment key={reply.data.id} comment={reply} depth={depth + 1} />
                                     ))}
