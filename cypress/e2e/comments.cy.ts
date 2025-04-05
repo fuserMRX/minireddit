@@ -3,6 +3,7 @@ describe('Comments Functionality', () => {
   beforeEach(() => {
     // Visit the home page
     cy.visit('/');
+    cy.wait(500);
 
     // Click on the first post's comments
     cy.get('[data-testid="reddit-post"]').first().within(() => {

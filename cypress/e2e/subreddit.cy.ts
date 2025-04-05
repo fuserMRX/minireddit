@@ -2,6 +2,7 @@ describe('Subreddit Page', () => {
     it('should navigate to a specific subreddit', () => {
         // Visit the home page first
         cy.visit('/');
+        cy.wait(500);
 
         // Click on a subreddit (assuming the first one)
         cy.get('[data-testid="subreddit-button"]').first().click();

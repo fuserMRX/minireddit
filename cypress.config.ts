@@ -1,6 +1,4 @@
 import { defineConfig } from 'cypress';
-import { resolve } from 'path';
-import webpackPreprocessor from '@cypress/webpack-preprocessor';
 
 export default defineConfig({
     e2e: {
@@ -22,20 +20,6 @@ export default defineConfig({
                 return launchOptions;
             });
 
-            // @cypress/webpack-preprocessor for handling @ imports
-            on(
-                'file:preprocessor',
-                webpackPreprocessor({
-                    webpackOptions: {
-                        resolve: {
-                            alias: {
-                                '@': resolve(__dirname, './'),
-                            },
-                        },
-                    },
-                })
-            );
-
             return config;
         },
     },
@@ -43,14 +27,6 @@ export default defineConfig({
         devServer: {
             framework: 'next',
             bundler: 'webpack',
-            // @cypress/webpack-preprocessor for handling @ imports
-            webpackConfig: {
-                resolve: {
-                    alias: {
-                        '@': resolve(__dirname, './'),
-                    },
-                },
-            },
         },
         viewportWidth: 1280,
         viewportHeight: 720,

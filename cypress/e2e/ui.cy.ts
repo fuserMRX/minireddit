@@ -1,6 +1,7 @@
 describe('UI Elements', () => {
     beforeEach(() => {
         cy.visit('/');
+        cy.wait(500);
     });
 
     context('Navbar', () => {

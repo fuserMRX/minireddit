@@ -5,12 +5,7 @@
     "types": ["cypress", "node"],
     "esModuleInterop": true,
     "jsx": "react",
-    "noImplicitAny": false,
-    // @cypress/webpack-preprocessor for handling @ imports
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["*"]
-    }
+    "noImplicitAny": false
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }

@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -35,20 +36,11 @@
 //   }
 // }
 
-// Add custom commands for element selectors we'll use frequently
-// Cypress.Commands.add('getByTestId', (testId) => {
-//   return cy.get(`[data-testid="${testId}"]`);
-// });
+// Prevent TypeScript from reading file as legacy script
+export {};
 
-// // Add command to check if an element exists
-// Cypress.Commands.add('elementExists', (selector) => {
-//   return cy.get('body').then(($body) => {
-//     return $body.find(selector).length > 0;
-//   });
-// });
+// Custom commands go here
+// https://on.cypress.io/custom-commands
 
-// Add accessibility testing commands if needed
 // Example:
-// Cypress.Commands.add('checkA11y', () => {
-//   cy.checkA11y();
-// });
+// Cypress.Commands.add('login', (email, password) => { ... })
