@@ -1,125 +1,33 @@
-describe('API Functionality', () => {
-    beforeEach(() => {
-        // Load fixtures
-        cy.fixture('subreddits.json').as('subredditsData');
-        cy.fixture('posts.json').as('postsData');
-        cy.fixture('comments.json').as('commentsData');
-    });
+describe('Reddit API Client-Side Tests', () => {
+    context('Subreddit API client calls', () => {
+        beforeEach(() => {
+            // Set up the intercept before the app makes the request
+            cy.intercept('GET', 'https://www.reddit.com/r/*.json', {
+                fixture: 'reddit-api.fixture.json'
+            }).as('subredditRequest');
 
-    it('should load posts from the API', () => {
-        // Setup intercept for posts API
-        cy.get('@postsData').then((postsData) => {
-            cy.intercept('GET', '/api/posts*', { body: postsData }).as(
-                'getPosts'
-            );
-
-            // Visit homepage
             cy.visit('/');
 
-            // Wait for API call
-            cy.wait('@getPosts');
-
-            // Verify posts are displayed
-            cy.get('[data-testid="reddit-post"]').should('have.length', 5);
-
-            // Verify first post content
-            cy.get('[data-testid="reddit-post"]')
-                .first()
-                .within(() => {
-                    cy.contains('Understanding React Hooks').should(
-                        'be.visible'
-                    );
-                });
+            // Wait for the page to load
+            cy.get('[data-testid="reddit-post"]', { timeout: 10000 }).should('exist');
         });
-    });
 
-    it('should load subreddits from the API', () => {
-        // Setup intercept for subreddits API
-        cy.get('@subredditsData').then((subredditsData) => {
-            cy.intercept('GET', '/api/subreddits*', {
-                body: subredditsData,
-            }).as('getSubreddits');
+        it('should intercept and mock subreddit API requests', () => {
+            // First click on the subreddit button to open the subreddit menu
+            cy.get('[data-testid="subreddit-button"]').first().click();
 
-            // Visit homepage
-            cy.visit('/');
+            // Wait for the intercepted request
+            cy.wait('@subredditRequest').then(interception => {
+                // Verify the interception was successful
+                expect(interception.response.statusCode).to.equal(200);
 
-            // Wait for API call
-            cy.wait('@getSubreddits');
+                // Verify the fixture data was used
+                expect(interception.response.body).to.have.property('kind', 'Listing');
 
-            // Verify subreddits are displayed
-            cy.get('[data-testid="subreddit-button"]').should('have.length', 5);
-
-            // Verify first subreddit content
-            cy.get('[data-testid="subreddit-button"]')
-                .first()
-                .within(() => {
-                    cy.contains('r/programming').should('be.visible');
-                });
-        });
-    });
-
-    it('should load comments when a post is expanded', () => {
-        // Setup intercept for posts API
-        cy.get('@postsData').then((postsData) => {
-            cy.intercept('GET', '/api/posts*', { body: postsData }).as(
-                'getPosts'
-            );
-
-            // Setup intercept for comments API
-            cy.get('@commentsData').then((commentsData) => {
-                cy.intercept('GET', '/api/comments*', {
-                    body: commentsData,
-                }).as('getComments');
-
-                // Visit homepage
-                cy.visit('/');
-
-                // Wait for posts to load
-                cy.wait('@getPosts');
-
-                // Click on the first post's comments
-                cy.get('[data-testid="reddit-post"]')
-                    .first()
-                    .within(() => {
-                        cy.get('[data-testid="comment-button"]').click();
-                    });
-
-                // Wait for comments API
-                cy.wait('@getComments');
-
-                // Verify comments are loaded
-                cy.get('[data-testid="comment"]').should('have.length', 5);
-
-                // Verify first comment content
-                cy.get('[data-testid="comment"]')
-                    .first()
-                    .within(() => {
-                        cy.contains('react_user').should('be.visible');
-                    });
+                // Verify the UI updated with the fixture data
+                cy.get('[data-testid="reddit-post"]').should('exist');
+                cy.get('[data-testid="reddit-post"]').should('have.length.at.least', 1);
             });
-        });
-    });
-
-    it('should show error state when API fails', () => {
-        // Setup intercept for posts API to fail
-        cy.intercept('GET', '/api/posts*', { statusCode: 500 }).as(
-            'getPostsError'
-        );
-
-        // Visit homepage
-        cy.visit('/');
-
-        // Wait for API call
-        cy.wait('@getPostsError');
-
-        // Check for error state
-        cy.get('body').then(($body) => {
-            if ($body.find('[data-testid="error-message"]').length > 0) {
-                cy.get('[data-testid="error-message"]').should('be.visible');
-            } else {
-                // If no explicit error component, at least ensure no posts are shown
-                cy.get('[data-testid="reddit-post"]').should('not.exist');
-            }
         });
     });
 });

@@ -1,47 +1,72 @@
 [
     {
-        "name": "programming",
-        "display_name": "r/programming",
-        "title": "Programming",
-        "description": "Computer Programming",
-        "subscribers": 5000000,
-        "active_users": 12000,
-        "icon_img": "https://example.com/programming.png"
+        "kind": "t5",
+        "data": {
+            "id": "reactjs",
+            "display_name": "reactjs",
+            "display_name_prefixed": "r/reactjs",
+            "url": "/r/reactjs/",
+            "subscribers": 354789,
+            "public_description": "A community for learning and developing web applications using React",
+            "icon_img": "https://example.com/reactjs-icon.png",
+            "community_icon": "https://example.com/reactjs-community-icon.png",
+            "banner_img": "https://example.com/reactjs-banner.png"
+        }
     },
     {
-        "name": "javascript",
-        "display_name": "r/javascript",
-        "title": "JavaScript",
-        "description": "All about JavaScript",
-        "subscribers": 2000000,
-        "active_users": 5000,
-        "icon_img": "https://example.com/javascript.png"
+        "kind": "t5",
+        "data": {
+            "id": "nextjs",
+            "display_name": "nextjs",
+            "display_name_prefixed": "r/nextjs",
+            "url": "/r/nextjs/",
+            "subscribers": 128456,
+            "public_description": "Next.js is a React framework for building full-stack web applications",
+            "icon_img": "https://example.com/nextjs-icon.png",
+            "community_icon": "https://example.com/nextjs-community-icon.png",
+            "banner_img": "https://example.com/nextjs-banner.png"
+        }
     },
     {
-        "name": "webdev",
-        "display_name": "r/webdev",
-        "title": "Web Development",
-        "description": "Web Development discussions",
-        "subscribers": 1500000,
-        "active_users": 4000,
-        "icon_img": "https://example.com/webdev.png"
+        "kind": "t5",
+        "data": {
+            "id": "javascript",
+            "display_name": "javascript",
+            "display_name_prefixed": "r/javascript",
+            "url": "/r/javascript/",
+            "subscribers": 789123,
+            "public_description": "All about the JavaScript programming language",
+            "icon_img": "https://example.com/js-icon.png",
+            "community_icon": "https://example.com/js-community-icon.png",
+            "banner_img": "https://example.com/js-banner.png"
+        }
     },
     {
-        "name": "reactjs",
-        "display_name": "r/reactjs",
-        "title": "React.js",
-        "description": "React JavaScript library",
-        "subscribers": 1000000,
-        "active_users": 3000,
-        "icon_img": "https://example.com/reactjs.png"
+        "kind": "t5",
+        "data": {
+            "id": "webdev",
+            "display_name": "webdev",
+            "display_name_prefixed": "r/webdev",
+            "url": "/r/webdev/",
+            "subscribers": 654321,
+            "public_description": "A community dedicated to all things web development",
+            "icon_img": "https://example.com/webdev-icon.png",
+            "community_icon": "https://example.com/webdev-community-icon.png",
+            "banner_img": "https://example.com/webdev-banner.png"
+        }
     },
     {
-        "name": "nextjs",
-        "display_name": "r/nextjs",
-        "title": "Next.js",
-        "description": "The React Framework",
-        "subscribers": 500000,
-        "active_users": 2000,
-        "icon_img": "https://example.com/nextjs.png"
+        "kind": "t5",
+        "data": {
+            "id": "programming",
+            "display_name": "programming",
+            "display_name_prefixed": "r/programming",
+            "url": "/r/programming/",
+            "subscribers": 987654,
+            "public_description": "Computer programming discussions and news",
+            "icon_img": "https://example.com/programming-icon.png",
+            "community_icon": "https://example.com/programming-community-icon.png",
+            "banner_img": "https://example.com/programming-banner.png"
+        }
     }
 ]

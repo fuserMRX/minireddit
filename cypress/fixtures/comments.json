@@ -1,73 +1,95 @@
 [
     {
-        "id": "comment1",
-        "author": "react_user",
-        "body": "I've been using hooks for a while now and they've completely changed how I build components. The useEffect hook in particular has been a game changer for managing side effects.",
-        "created_utc": 1679840000,
-        "score": 45,
-        "replies": [
-            {
-                "id": "reply1",
-                "author": "hooks_fan",
-                "body": "Agreed! I also find useReducer really helpful for complex state management instead of multiple useState calls.",
-                "created_utc": 1679850000,
-                "score": 22
-            },
-            {
-                "id": "reply2",
-                "author": "dev_helper",
-                "body": "Don't forget about custom hooks! They're excellent for extracting reusable logic.",
-                "created_utc": 1679860000,
-                "score": 18
+        "kind": "t1",
+        "data": {
+            "id": "comment1",
+            "author": "devuser1",
+            "body": "This is a really insightful post! I've been using React Hooks for a while now and they've completely changed how I think about component state.",
+            "created_utc": 1679840000,
+            "score": 42,
+            "permalink": "/r/reactjs/comments/post1/comment1",
+            "replies": {
+                "kind": "Listing",
+                "data": {
+                    "children": [
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": "reply1",
+                                "author": "reactfan",
+                                "body": "I agree! useState and useEffect are game changers.",
+                                "created_utc": 1679841000,
+                                "score": 15,
+                                "permalink": "/r/reactjs/comments/post1/reply1"
+                            }
+                        }
+                    ]
+                }
             }
-        ]
+        }
     },
     {
-        "id": "comment2",
-        "author": "web_expert",
-        "body": "One thing that's often overlooked with hooks is the dependency array in useEffect. Make sure you understand it well to avoid infinite renders!",
-        "created_utc": 1679865000,
-        "score": 38,
-        "replies": []
+        "kind": "t1",
+        "data": {
+            "id": "comment2",
+            "author": "webdev_pro",
+            "body": "Great explanation of the useCallback hook. I struggled with that one for a while.",
+            "created_utc": 1679850000,
+            "score": 28,
+            "permalink": "/r/reactjs/comments/post1/comment2",
+            "replies": ""
+        }
     },
     {
-        "id": "comment3",
-        "author": "code_mentor",
-        "body": "Great post! I'd also recommend looking into the useCallback and useMemo hooks for performance optimization, especially in larger applications.",
-        "created_utc": 1679870000,
-        "score": 32,
-        "replies": [
-            {
-                "id": "reply3",
-                "author": "performance_guru",
-                "body": "Absolutely, but be careful not to over-optimize. Sometimes the overhead of these hooks isn't worth it for simple components.",
-                "created_utc": 1679875000,
-                "score": 15
+        "kind": "t1",
+        "data": {
+            "id": "comment3",
+            "author": "js_enthusiast",
+            "body": "Do you have any examples of using useContext for global state management? I'm trying to decide between that and Redux.",
+            "created_utc": 1679860000,
+            "score": 35,
+            "permalink": "/r/reactjs/comments/post1/comment3",
+            "replies": {
+                "kind": "Listing",
+                "data": {
+                    "children": [
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": "reply2",
+                                "author": "user123",
+                                "body": "Sure! I've found useContext combined with useReducer to be a great lightweight alternative to Redux for many apps. Here's a basic pattern I use...",
+                                "created_utc": 1679861000,
+                                "score": 22,
+                                "permalink": "/r/reactjs/comments/post1/reply2"
+                            }
+                        },
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": "reply3",
+                                "author": "redux_fan",
+                                "body": "I'd still recommend Redux for complex state management, especially with Redux Toolkit which removes a lot of the boilerplate.",
+                                "created_utc": 1679862000,
+                                "score": 18,
+                                "permalink": "/r/reactjs/comments/post1/reply3"
+                            }
+                        }
+                    ]
+                }
             }
-        ]
+        }
     },
     {
-        "id": "comment4",
-        "author": "junior_dev",
-        "body": "Can someone explain the difference between useEffect and useLayoutEffect? I'm still confused about when to use which one.",
-        "created_utc": 1679880000,
-        "score": 12,
-        "replies": [
-            {
-                "id": "reply4",
-                "author": "senior_dev",
-                "body": "useLayoutEffect runs synchronously after DOM mutations but before the browser paints, while useEffect runs asynchronously after paint. Use useLayoutEffect when you need to measure DOM elements or prevent visual flicker.",
-                "created_utc": 1679885000,
-                "score": 28
-            }
-        ]
-    },
-    {
-        "id": "comment5",
-        "author": "library_author",
-        "body": "If you're building libraries or reusable components, consider how hooks affect your API design. Sometimes class components still make sense for certain use cases.",
-        "created_utc": 1679890000,
-        "score": 19,
-        "replies": []
+        "kind": "t1",
+        "data": {
+            "id": "comment4",
+            "author": "code_ninja",
+            "body": "Have you looked at the upcoming React 19 features? They're expanding on the hooks concept even further.",
+            "created_utc": 1679870000,
+            "score": 31,
+            "permalink": "/r/reactjs/comments/post1/comment4",
+            "replies": ""
+        }
     }
 ]

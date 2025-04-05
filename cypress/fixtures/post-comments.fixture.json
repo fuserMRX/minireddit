@@ -1,0 +1,129 @@
+[
+  {
+    "kind": "Listing",
+    "data": {
+      "after": null,
+      "dist": 1,
+      "modhash": "",
+      "geo_filter": "",
+      "children": [
+        {
+          "kind": "t3",
+          "data": {
+            "id": "post1",
+            "title": "Understanding React Hooks",
+            "author": "user123",
+            "subreddit": "reactjs",
+            "score": 1500,
+            "num_comments": 45,
+            "created_utc": 1679837512,
+            "permalink": "/r/reactjs/comments/post1",
+            "url": "https://example.com/react-hooks",
+            "selftext": "I've been diving into React Hooks lately and wanted to share some insights...",
+            "thumbnail": "https://example.com/thumbnail1.jpg",
+            "is_video": false,
+            "upvote_ratio": 0.95,
+            "name": "t3_post1"
+          }
+        }
+      ],
+      "before": null
+    }
+  },
+  {
+    "kind": "Listing",
+    "data": {
+      "after": null,
+      "dist": null,
+      "modhash": "",
+      "geo_filter": "",
+      "children": [
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment1",
+            "author": "devuser1",
+            "body": "This is a really insightful post! I've been using React Hooks for a while now and they've completely changed how I think about component state.",
+            "created_utc": 1679840000,
+            "score": 42,
+            "permalink": "/r/reactjs/comments/post1/comment1",
+            "replies": {
+              "kind": "Listing",
+              "data": {
+                "children": [
+                  {
+                    "kind": "t1",
+                    "data": {
+                      "id": "reply1",
+                      "author": "reactfan",
+                      "body": "I agree! useState and useEffect are game changers.",
+                      "created_utc": 1679841000,
+                      "score": 15,
+                      "permalink": "/r/reactjs/comments/post1/reply1",
+                      "replies": ""
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment2",
+            "author": "webdev_pro",
+            "body": "Great explanation of the useCallback hook. I struggled with that one for a while.",
+            "created_utc": 1679850000,
+            "score": 28,
+            "permalink": "/r/reactjs/comments/post1/comment2",
+            "replies": ""
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment3",
+            "author": "js_enthusiast",
+            "body": "Do you have any examples of using useContext for global state management? I'm trying to decide between that and Redux.",
+            "created_utc": 1679860000,
+            "score": 35,
+            "permalink": "/r/reactjs/comments/post1/comment3",
+            "replies": {
+              "kind": "Listing",
+              "data": {
+                "children": [
+                  {
+                    "kind": "t1",
+                    "data": {
+                      "id": "reply2",
+                      "author": "user123",
+                      "body": "Sure! I've found useContext combined with useReducer to be a great lightweight alternative to Redux for many apps. Here's a basic pattern I use...",
+                      "created_utc": 1679861000,
+                      "score": 22,
+                      "permalink": "/r/reactjs/comments/post1/reply2",
+                      "replies": ""
+                    }
+                  },
+                  {
+                    "kind": "t1",
+                    "data": {
+                      "id": "reply3",
+                      "author": "redux_fan",
+                      "body": "I'd still recommend Redux for complex state management, especially with Redux Toolkit which removes a lot of the boilerplate.",
+                      "created_utc": 1679862000,
+                      "score": 18,
+                      "permalink": "/r/reactjs/comments/post1/reply3",
+                      "replies": ""
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "before": null
+    }
+  }
+] 

@@ -7,7 +7,7 @@ export default defineConfig({
         viewportHeight: 720,
         video: false,
         screenshotOnRunFailure: false,
-        screenshotsFolder: false,
+        screenshotsFolder: 'cypress/screenshots',
         testIsolation: false,
         experimentalRunAllSpecs: true,
         experimentalModifyObstructiveThirdPartyCode: true,

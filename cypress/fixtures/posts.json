@@ -1,62 +1,97 @@
 [
     {
-        "id": "post1",
-        "title": "Understanding React Hooks",
-        "author": "user123",
-        "subreddit": "reactjs",
-        "score": 1500,
-        "num_comments": 45,
-        "created_utc": 1679837512,
-        "permalink": "/r/reactjs/comments/post1",
-        "url": "https://example.com/react-hooks",
-        "selftext": "I've been diving into React Hooks lately and wanted to share some insights..."
+        "kind": "t3",
+        "data": {
+            "id": "post1",
+            "title": "Understanding React Hooks",
+            "author": "user123",
+            "subreddit": "reactjs",
+            "score": 1500,
+            "num_comments": 45,
+            "created_utc": 1679837512,
+            "permalink": "/r/reactjs/comments/post1",
+            "url": "https://example.com/react-hooks",
+            "selftext": "I've been diving into React Hooks lately and wanted to share some insights...",
+            "thumbnail": "https://example.com/thumbnail1.jpg",
+            "is_video": false,
+            "upvote_ratio": 0.95,
+            "name": "t3_post1"
+        }
     },
     {
-        "id": "post2",
-        "title": "Next.js 13 Features Overview",
-        "author": "nextjs_fan",
-        "subreddit": "nextjs",
-        "score": 890,
-        "num_comments": 32,
-        "created_utc": 1679937700,
-        "permalink": "/r/nextjs/comments/post2",
-        "url": "https://example.com/nextjs-13",
-        "selftext": "Next.js 13 introduces several groundbreaking features including..."
+        "kind": "t3",
+        "data": {
+            "id": "post2",
+            "title": "Next.js 13 Features Overview",
+            "author": "nextjs_fan",
+            "subreddit": "nextjs",
+            "score": 890,
+            "num_comments": 32,
+            "created_utc": 1679937700,
+            "permalink": "/r/nextjs/comments/post2",
+            "url": "https://example.com/nextjs-13",
+            "selftext": "Next.js 13 introduces several groundbreaking features including...",
+            "thumbnail": "https://example.com/thumbnail2.jpg",
+            "is_video": false,
+            "upvote_ratio": 0.88,
+            "name": "t3_post2"
+        }
     },
     {
-        "id": "post3",
-        "title": "The Future of JavaScript: What's Coming in ES2023",
-        "author": "js_explorer",
-        "subreddit": "javascript",
-        "score": 2100,
-        "num_comments": 78,
-        "created_utc": 1680023100,
-        "permalink": "/r/javascript/comments/post3",
-        "url": "https://example.com/es2023",
-        "selftext": "ECMAScript 2023 is bringing exciting new features to JavaScript..."
+        "kind": "t3",
+        "data": {
+            "id": "post3",
+            "title": "The Future of JavaScript: What's Coming in ES2023",
+            "author": "js_explorer",
+            "subreddit": "javascript",
+            "score": 2100,
+            "num_comments": 78,
+            "created_utc": 1680023100,
+            "permalink": "/r/javascript/comments/post3",
+            "url": "https://example.com/es2023",
+            "selftext": "ECMAScript 2023 is bringing exciting new features to JavaScript...",
+            "thumbnail": "https://example.com/thumbnail3.jpg",
+            "is_video": false,
+            "upvote_ratio": 0.92,
+            "name": "t3_post3"
+        }
     },
     {
-        "id": "post4",
-        "title": "Building Accessible Web Applications",
-        "author": "a11y_advocate",
-        "subreddit": "webdev",
-        "score": 750,
-        "num_comments": 28,
-        "created_utc": 1680112200,
-        "permalink": "/r/webdev/comments/post4",
-        "url": "https://example.com/web-accessibility",
-        "selftext": "Accessibility should be a priority for all web developers. Here's how to get started..."
+        "kind": "t3",
+        "data": {
+            "id": "post4",
+            "title": "Building Accessible Web Applications",
+            "author": "a11y_advocate",
+            "subreddit": "webdev",
+            "score": 750,
+            "num_comments": 28,
+            "created_utc": 1680112200,
+            "permalink": "/r/webdev/comments/post4",
+            "url": "https://example.com/web-accessibility",
+            "selftext": "Accessibility should be a priority for all web developers. Here's how to get started...",
+            "thumbnail": "https://example.com/thumbnail4.jpg",
+            "is_video": false,
+            "upvote_ratio": 0.97,
+            "name": "t3_post4"
+        }
     },
     {
-        "id": "post5",
-        "title": "Optimizing Algorithms for Performance",
-        "author": "code_optimizer",
-        "subreddit": "programming",
-        "score": 1850,
-        "num_comments": 56,
-        "created_utc": 1680198600,
-        "permalink": "/r/programming/comments/post5",
-        "url": "https://example.com/algorithm-optimization",
-        "selftext": "I've been working on optimizing some complex algorithms and wanted to share my techniques..."
+        "kind": "t3",
+        "data": {
+            "id": "post5",
+            "title": "Optimizing Algorithms for Performance",
+            "author": "code_optimizer",
+            "subreddit": "programming",
+            "score": 1850,
+            "num_comments": 56,
+            "created_utc": 1680198600,
+            "permalink": "/r/programming/comments/post5",
+            "url": "https://example.com/algorithm-optimization",
+            "selftext": "I've been working on optimizing some complex algorithms and wanted to share my techniques...",
+            "thumbnail": "https://example.com/thumbnail5.jpg",
+            "is_video": true,
+            "upvote_ratio": 0.89,
+            "name": "t3_post5"
+        }
     }
 ]
