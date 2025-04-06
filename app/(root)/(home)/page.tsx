@@ -4,11 +4,15 @@ import { popularRedditUrl } from '@/constants/redditUrls';
 import RedditPostsList from '@/components/reddit/RedditPostsList';
 import Subreddits from '@/components/reddit/Subreddits';
 import { extractSubreddits } from '@/lib/utils';
+import { ErrorMessage } from '@/components/ErrorMessage';
 
 export default async function HomePage() {
     try {
         // Server-side fetch for initial load
         const response = await fetch(`${popularRedditUrl.subredditUrl}`, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)'
+            },
             next: { revalidate: 3600 },
         });
 
@@ -38,7 +42,13 @@ export default async function HomePage() {
         );
     } catch (error) {
         console.error('Error fetching data:', error);
-        return <div>Failed to load Reddit posts</div>;
+        return (
+            <div className='mx-auto max-w-3xl p-6 md:p-8'>
+                <ErrorMessage
+                    message="We couldn't load the Reddit posts at this time. Please try again later."
+                />
+            </div>
+        );
     }
 }
 

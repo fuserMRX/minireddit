@@ -23,6 +23,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getTimestamp, formatLargeNumber } from '@/lib/utils';
 import type { RedditItem } from '@/lib/redux/features/reddits/redditSlice';
 import RedditComments from '@/components/reddit/RedditComments';
+import { ErrorMessage } from '@/components/ErrorMessage';
 
 interface RedditPostsListProps {
     initialPosts: RedditItem[];
@@ -102,6 +103,26 @@ export default function RedditPostsList({
     // Show loading skeleton only when explicitly loading from Redux actions (like subreddit switching)
     if (redditPosts.length > 0 && loadingStatus === 'loading') {
         return <RedditPostsListLoader />;
+    }
+
+    // Handle failed loading state
+    if (loadingStatus === 'failed') {
+        return (
+            <ErrorMessage
+                message="Unable to load posts. Reddit's API may be rate limiting us."
+                onRetry={() => window.location.reload()}
+            />
+        );
+    }
+
+    // Show empty state if no posts
+    if (!postsToDisplay.length) {
+        return (
+            <ErrorMessage
+                message="No posts found. Try another subreddit or refresh the page."
+                onRetry={() => window.location.reload()}
+            />
+        );
     }
 
     // Handle voting with proper state management

@@ -5,5 +5,5 @@ interface RedditUrl {
 
 export const popularRedditUrl: RedditUrl = {
     subredditId: 'popular',
-    subredditUrl: 'https://www.reddit.com/r/popular.json',
+    subredditUrl: 'https://www.reddit.com/r/dsfsdfpopular.json',
 };
