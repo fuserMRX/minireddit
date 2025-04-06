@@ -20,6 +20,7 @@ export default async function HomePage() {
         if (!response.ok) {
             const errorText = await response.text();
             console.error('Non-OK response:', response.status, errorText);
+            throw new Error(`Failed to fetch: ${response.statusText}`);
         }
 
         const { data: { children } = {} } = await response.json();
@@ -52,7 +53,6 @@ export default async function HomePage() {
             <div className='mx-auto max-w-3xl p-6 md:p-8'>
                 <ErrorMessage
                     message="We couldn't load the Reddit posts at this time. Please try again later."
-                    onRetry={() => window.location.reload()}
                 />
             </div>
         );
