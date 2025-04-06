@@ -11,8 +11,7 @@ export default async function HomePage() {
         // Server-side fetch for initial load
         const response = await fetch(`${popularRedditUrl.subredditUrl}`, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)',
-                'Accept': 'application/json'
+                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)'
             },
             next: { revalidate: 3600 },
         });
