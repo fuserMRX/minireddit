@@ -57,9 +57,6 @@ describe('RedditComment component', () => {
         // Check if show replies button exists
         cy.get('[data-testid="show-replies-button"]').should('exist');
 
-        // Click to show replies
-        cy.get('[data-testid="show-replies-button"]').click();
-
         // Check if reply container is visible
         cy.get('[data-testid="replies-container"]').should('be.visible');
 
@@ -67,5 +64,11 @@ describe('RedditComment component', () => {
         cy.get('[data-testid="replies-container"]')
             .find('[data-testid="comment-body"]')
             .should('contain', 'This is a test reply');
+
+        // Click to show replies
+        cy.get('[data-testid="show-replies-button"]').click();
+
+        // Check if reply container is not visible
+        cy.get('[data-testid="replies-container"]').should('not.exist');
     });
 });

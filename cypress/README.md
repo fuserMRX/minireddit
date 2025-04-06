@@ -1,82 +1,97 @@
-# Cypress Tests for Mini-Reddit
+# Cypress Tests for MiniReddit
 
-This directory contains end-to-end and component tests for the Mini-Reddit application.
-
-## Structure
-
-- `cypress/e2e/`: Contains end-to-end tests that simulate user interactions with the application
-- `cypress/fixtures/`: Contains test data used by tests
-- `cypress/support/`: Contains helper functions, custom commands, and global configuration
+This directory contains Cypress tests for the MiniReddit application.
 
 ## Running Tests
 
-### Running in the UI Mode
-
-To open Cypress in UI mode:
+To run the Cypress tests:
 
 ```bash
+# Run tests in headless mode
+npm run cypress:run
+
+# Open Cypress UI for interactive testing
 npm run cypress:open
 ```
 
-This will open the Cypress Test Runner where you can select which tests to run.
+## Test Structure
 
-### Running in Headless Mode
+The tests are organized as follows:
 
-To run all tests in headless mode:
+### E2E Tests (`e2e/`)
 
-```bash
-npm run cypress:run
+- **api.cy.ts** - Tests client-side API integrations with Reddit, using intercepted API calls
+- **ui.cy.ts** - Tests UI components across different screen sizes for responsive design
+- **subreddit.cy.ts** - Tests subreddit navigation and content display
+- **home.cy.ts** - Tests the home page functionality
+- **comments.cy.ts** - Tests comment display and interaction
+
+### Component Tests (`component/`)
+
+- **RedditComment.cy.tsx** - Tests the comment component in isolation
+- **Theme.cy.tsx** - Tests the theme toggling functionality
+
+## Fixtures (`fixtures/`)
+
+The tests use fixtures to mock Reddit API responses:
+
+- **reddit-api.fixture.json** - Main Reddit feed response
+- **subreddit-api.fixture.json** - Subreddit-specific feed
+- **post-comments.fixture.json** - Comments for a specific post
+- **posts.json** & **comments.json** - Individual post and comment data
+
+## Key Testing Patterns
+
+### 1. API Interception
+
+```typescript
+// Set up the intercept before the app makes the request
+cy.intercept('GET', 'https://www.reddit.com/r/*.json', {
+  fixture: 'reddit-api.fixture.json'
+}).as('subredditRequest');
+
+// Visit the page
+cy.visit('/');
+
+// Trigger the API call
+cy.get('[data-testid="subreddit-button"]').click();
+
+// Wait for and verify the intercepted request
+cy.wait('@subredditRequest').then(interception => {
+  expect(interception.response.statusCode).to.equal(200);
+  // Further assertions...
+});
 ```
 
-To run a specific test file:
+### 2. Responsive UI Testing
 
-```bash
-npm run cypress:run -- --spec "cypress/e2e/home.cy.ts"
+```typescript
+// Test mobile view
+cy.viewport('iphone-x');
+cy.get('[data-testid="reddit-post"]').should('be.visible');
+
+// Test tablet view
+cy.viewport('ipad-2');
+cy.get('[data-testid="reddit-post"]').should('be.visible');
+
+// Test desktop view
+cy.viewport(1280, 720);
+cy.get('[data-testid="reddit-post"]').should('be.visible');
 ```
 
-## Test Categories
+### 3. Component Testing
 
-1. **Home Page Tests** (`home.cy.ts`)
-   - Basic page loading
-   - Subreddit sidebar display
-   - Reddit posts display
-   - Theme toggle functionality
+```typescript
+// Mount a component with mock props
+cy.mount(<RedditComment comment={mockComment} />);
 
-2. **Subreddit Page Tests** (`subreddit.cy.ts`)
-   - Navigation to a specific subreddit
-   - Subreddit-specific posts
-   - Comment expansion
-
-3. **Comments Tests** (`comments.cy.ts`)
-   - Comment display
-   - Comment content and author display
-   - Top-level comments notification
-   - Reply toggle functionality
-
-4. **UI Tests** (`ui.cy.ts`)
-   - Responsive design tests across different viewports
-   - Layout adjustments for mobile, tablet, and desktop
-   - Dark mode functionality
-
-5. **Search Tests** (`search.cy.ts`)
-   - Search input functionality
-   - Search results display
-   - No results handling
-   - Search clear functionality
-
-## Adding New Tests
-
-When adding new tests:
-
-1. Create a new file in the `cypress/e2e/` directory
-2. Use the existing test patterns as a guide
-3. Add data-testid attributes to elements in the application to make them easier to select
-4. Run tests frequently to ensure they're working as expected
+// Test component functionality
+cy.get('[data-testid="comment-author"]').should('contain', mockComment.author);
+```
 
 ## Best Practices
 
-- Use data-testid attributes for element selection instead of CSS classes or elements
-- Keep tests focused on a single aspect of functionality
-- Use beforeEach hooks to set up common test state
-- Use fixtures for test data
-- Keep tests independent of each other 
+1. **Use data-testid attributes** - The app uses data-testid attributes for reliable element selection
+2. **Mock API responses** - Use fixtures to ensure consistent, controlled test data
+3. **Test responsive behavior** - Verify the UI works across different device sizes
+4. **Isolate component tests** - Test complex components in isolation using component testing
