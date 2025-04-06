@@ -6,9 +6,6 @@ import Subreddits from '@/components/reddit/Subreddits';
 import { extractSubreddits } from '@/lib/utils';
 import { ErrorMessage } from '@/components/ErrorMessage';
 
-// Force this route to be dynamically rendered
-export const dynamic = 'force-dynamic';
-
 export default async function HomePage() {
     try {
         // Get base URL with fallback for Vercel
@@ -20,7 +17,7 @@ export default async function HomePage() {
         console.log('[HomePage] Fetching from:', apiUrl);
 
         const response = await fetch(apiUrl, {
-            cache: 'no-store',
+            next: { revalidate: 3600 },
         });
 
         if (!response.ok) {
