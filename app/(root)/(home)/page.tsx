@@ -11,10 +11,17 @@ export default async function HomePage() {
         // Server-side fetch for initial load
         const response = await fetch(`${popularRedditUrl.subredditUrl}`, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)'
+                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)',
+                'Accept': 'application/json'
             },
             next: { revalidate: 3600 },
         });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Non-OK response:', response.status, errorText);
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
 
         const { data: { children } = {} } = await response.json();
         const subredditsData = extractSubreddits(children);
@@ -46,6 +53,7 @@ export default async function HomePage() {
             <div className='mx-auto max-w-3xl p-6 md:p-8'>
                 <ErrorMessage
                     message="We couldn't load the Reddit posts at this time. Please try again later."
+                    onRetry={() => window.location.reload()}
                 />
             </div>
         );
