@@ -11,7 +11,8 @@ export default async function HomePage() {
         // Server-side fetch for initial load
         const response = await fetch(`${popularRedditUrl.subredditUrl}`, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)'
+                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)',
+                'Accept': 'application/json'
             },
             next: { revalidate: 3600 },
         });
@@ -19,7 +20,6 @@ export default async function HomePage() {
         if (!response.ok) {
             const errorText = await response.text();
             console.error('Non-OK response:', response.status, errorText);
-            throw new Error(`Failed to fetch: ${response.statusText}`);
         }
 
         const { data: { children } = {} } = await response.json();
