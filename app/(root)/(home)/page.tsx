@@ -9,11 +9,8 @@ import { ErrorMessage } from '@/components/ErrorMessage';
 export default async function HomePage() {
     try {
         // Server-side fetch for initial load
-        const response = await fetch(`${popularRedditUrl.subredditUrl}`, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; MiniredditBot/1.0)',
-                'Accept': 'application/json'
-            },
+        // Using absolute URL to call our own API route
+        const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/redditMainFeed', {
             next: { revalidate: 3600 },
         });
 
