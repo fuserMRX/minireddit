@@ -8,20 +8,33 @@ import { ErrorMessage } from '@/components/ErrorMessage';
 
 export default async function HomePage() {
     try {
+        // Get base URL with fallback for Vercel
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+                       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+
         // Server-side fetch for initial load
-        // Using absolute URL to call our own API route
-        const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/redditMainFeed', {
-            next: { revalidate: 3600 },
+        const apiUrl = `${baseUrl}/api/redditMainFeed`;
+        console.log('[HomePage] Fetching from:', apiUrl);
+
+        const response = await fetch(apiUrl, {
+            cache: 'no-store',
         });
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('Non-OK response:', response.status, errorText);
+            console.error('[HomePage] Non-OK response:', response.status, errorText);
             throw new Error(`Failed to fetch: ${response.statusText}`);
         }
 
-        const { data: { children } = {} } = await response.json();
+        console.log('[HomePage] API response received successfully');
+        const responseData = await response.json();
+
+        // Safely extract children from data
+        const children = responseData?.data?.children || [];
+        console.log('[HomePage] Found', children.length, 'posts');
+
         const subredditsData = extractSubreddits(children);
+        console.log('[HomePage] Extracted', subredditsData.length, 'subreddits');
 
         // Add popular subreddit but without isActive property
         subredditsData.push({
