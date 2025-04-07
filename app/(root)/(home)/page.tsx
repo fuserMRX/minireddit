@@ -13,7 +13,8 @@ export default async function HomePage() {
                        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
         // Server-side fetch for initial load
-        const apiUrl = `${baseUrl}/api/redditMainFeed`;
+        // const apiUrl = `${baseUrl}/api/redditMainFeed`;
+        const apiUrl = 'https://old.reddit.com/r/popular.json';
         console.log('[HomePage] Fetching from:', apiUrl);
 
         const response = await fetch(apiUrl, {
