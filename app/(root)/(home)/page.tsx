@@ -18,6 +18,10 @@ export default async function HomePage() {
         console.log('[HomePage] Fetching from:', apiUrl);
 
         const response = await fetch(apiUrl, {
+            headers: {
+                'User-Agent': 'reddit:MiniRedditApp:1.0 (by /u/Playful_Yak_1874)',
+                'Accept': 'application/json',
+            },
             next: { revalidate: 3600 },
         });
 
