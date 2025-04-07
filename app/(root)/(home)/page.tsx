@@ -14,7 +14,7 @@ export default async function HomePage() {
 
         // Server-side fetch for initial load
         // const apiUrl = `${baseUrl}/api/redditMainFeed`;
-        const apiUrl = 'https://www.reddit.com/r/popular.json';
+        const apiUrl = 'https://old.reddit.com/r/popular.json';
         console.log('[HomePage] Fetching from:', apiUrl);
 
         const response = await fetch(apiUrl, {
