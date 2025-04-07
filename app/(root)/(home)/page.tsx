@@ -9,8 +9,8 @@ import { ErrorMessage } from '@/components/ErrorMessage';
 export default async function HomePage() {
     try {
         // Get base URL with fallback for Vercel
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
-                       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+        // const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+        //                (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
         // Server-side fetch for initial load
         // const apiUrl = `${baseUrl}/api/redditMainFeed`;
