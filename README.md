@@ -22,6 +22,37 @@
 - ⚡ Server and client-side data fetching
 - 🧪 Comprehensive test coverage with Cypress
 
+## ⚠️ Deployment Notes
+
+**Important:** Due to Reddit's API restrictions, server-side requests to public Reddit URLs (like `https://www.reddit.com/r/popular.json`) are blocked when deployed to platforms like Vercel or Netlify. This is because Reddit blocks requests from cloud provider IPs.
+
+To work around this limitation, this application:
+- Uses client-side fetching in the browser for Reddit data
+- Implements Redux for state management
+- Avoids server components making direct calls to Reddit's API
+
+If you need to deploy with server-side Reddit API access, consider:
+1. Implementing Reddit's OAuth API with authentication
+2. Using a proxy service
+3. Self-hosting the application
+
+## 🏗️ Architecture
+
+This project uses a **hybrid architecture** that combines the best of server-side rendering and client-side state management:
+
+- **Server Components**: Next.js server components handle the initial page structure and SEO optimization
+- **Client Components**: React client components with 'use client' directive manage interactive elements
+- **Redux State Management**: Client-side data fetching and state management through Redux
+- **API Isolation**: APIs that might be blocked on server-side (like Reddit) are only called from client components
+
+This architecture provides significant benefits:
+- ⚡ Better initial page load performance and SEO through server rendering
+- 🔄 Improved user experience with client-side data fetching and state management
+- 🛡️ Protection against API restrictions like Reddit's blocking of server requests
+- 🧩 Clean separation of concerns between server and client code
+
+This pattern can be useful for other projects that need to integrate with external APIs that have similar restrictions.
+
 ## 🚀 Getting Started
 
 ### Prerequisites
